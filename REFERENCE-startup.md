@@ -54,7 +54,7 @@ user using up, down and enter keys and returns the chosen option.
 
 ## logo()
 
-Displays ArchTitus logo
+Displays SaikouOS logo
 
 _Function has no arguments._
 

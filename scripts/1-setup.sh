@@ -5,18 +5,28 @@
 # @brief Configures installed system, installs base packages, and creates user. 
 echo -ne "
 -------------------------------------------------------------------------
-   █████╗ ██████╗  ██████╗██╗  ██╗████████╗██╗████████╗██╗   ██╗███████╗
-  ██╔══██╗██╔══██╗██╔════╝██║  ██║╚══██╔══╝██║╚══██╔══╝██║   ██║██╔════╝
-  ███████║██████╔╝██║     ███████║   ██║   ██║   ██║   ██║   ██║███████╗
-  ██╔══██║██╔══██╗██║     ██╔══██║   ██║   ██║   ██║   ██║   ██║╚════██║
-  ██║  ██║██║  ██║╚██████╗██║  ██║   ██║   ██║   ██║   ╚██████╔╝███████║
-  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝   ╚═╝    ╚═════╝ ╚══════╝
+   SSSSSSSSSSSSSSS                     iiii  kkkkkkkk                                                 OOOOOOOOO        SSSSSSSSSSSSSSS 
+ SS:::::::::::::::S                   i::::i k::::::k                                               OO:::::::::OO    SS:::::::::::::::S
+S:::::SSSSSS::::::S                    iiii  k::::::k                                             OO:::::::::::::OO S:::::SSSSSS::::::S
+S:::::S     SSSSSSS                          k::::::k                                            O:::::::OOO:::::::OS:::::S     SSSSSSS
+S:::::S              aaaaaaaaaaaaa   iiiiiii  k:::::k    kkkkkkk ooooooooooo   uuuuuu    uuuuuu  O::::::O   O::::::OS:::::S            
+S:::::S              a::::::::::::a  i:::::i  k:::::k   k:::::koo:::::::::::oo u::::u    u::::u  O:::::O     O:::::OS:::::S            
+ S::::SSSS           aaaaaaaaa:::::a  i::::i  k:::::k  k:::::ko:::::::::::::::ou::::u    u::::u  O:::::O     O:::::O S::::SSSS         
+  SS::::::SSSSS               a::::a  i::::i  k:::::k k:::::k o:::::ooooo:::::ou::::u    u::::u  O:::::O     O:::::O  SS::::::SSSSS    
+    SSS::::::::SS      aaaaaaa:::::a  i::::i  k::::::k:::::k  o::::o     o::::ou::::u    u::::u  O:::::O     O:::::O    SSS::::::::SS  
+       SSSSSS::::S   aa::::::::::::a  i::::i  k:::::::::::k   o::::o     o::::ou::::u    u::::u  O:::::O     O:::::O       SSSSSS::::S 
+            S:::::S a::::aaaa::::::a  i::::i  k:::::::::::k   o::::o     o::::ou::::u    u::::u  O:::::O     O:::::O            S:::::S
+            S:::::Sa::::a    a:::::a  i::::i  k::::::k:::::k  o::::o     o::::ou:::::uuuu:::::u  O::::::O   O::::::O            S:::::S
+SSSSSSS     S:::::Sa::::a    a:::::a i::::::ik::::::k k:::::k o:::::ooooo:::::ou:::::::::::::::uuO:::::::OOO:::::::OSSSSSSS     S:::::S
+S::::::SSSSSS:::::Sa:::::aaaa::::::a i::::::ik::::::k  k:::::ko:::::::::::::::o u:::::::::::::::u OO:::::::::::::OO S::::::SSSSSS:::::S
+S:::::::::::::::SS  a::::::::::aa:::ai::::::ik::::::k   k:::::koo:::::::::::oo   uu::::::::uu:::u   OO:::::::::OO   S:::::::::::::::SS 
+ SSSSSSSSSSSSSSS     aaaaaaaaaa  aaaaiiiiiiiikkkkkkkk    kkkkkkk ooooooooooo       uuuuuuuu  uuuu     OOOOOOOOO      SSSSSSSSSSSSSSS
 -------------------------------------------------------------------------
                     Automated Arch Linux Installer
-                        SCRIPTHOME: ArchTitus
+                        SCRIPTHOME: SaikouOS
 -------------------------------------------------------------------------
 "
-source $HOME/ArchTitus/configs/setup.conf
+source $HOME/SaikouOS/configs/setup.conf
 echo -ne "
 -------------------------------------------------------------------------
                     Network Setup 
@@ -79,7 +89,7 @@ echo -ne "
 # sed $INSTALL_TYPE is using install type to check for MINIMAL installation, if it's true, stop
 # stop the script and move on, not installing any more packages below that line
 if [[ ! $DESKTOP_ENV == server ]]; then
-  sed -n '/'$INSTALL_TYPE'/q;p' $HOME/ArchTitus/pkg-files/pacman-pkgs.txt | while read line
+  sed -n '/'$INSTALL_TYPE'/q;p' $HOME/SaikouOS/pkg-files/pacman-pkgs.txt | while read line
   do
     if [[ ${line} == '--END OF MINIMAL INSTALL--' ]]; then
       # If selected installation type is FULL, skip the --END OF THE MINIMAL INSTALLATION-- line
@@ -124,7 +134,7 @@ elif grep -E "Intel Corporation UHD" <<< ${gpu_type}; then
     pacman -S --needed --noconfirm libva-intel-driver libvdpau-va-gl lib32-vulkan-intel vulkan-intel libva-intel-driver libva-utils lib32-mesa
 fi
 #SETUP IS WRONG THIS IS RUN
-if ! source $HOME/ArchTitus/configs/setup.conf; then
+if ! source $HOME/SaikouOS/configs/setup.conf; then
 	# Loop through user input until the user gives a valid username
 	while true
 	do 
@@ -138,11 +148,11 @@ if ! source $HOME/ArchTitus/configs/setup.conf; then
 		echo "Incorrect username."
 	done 
 # convert name to lowercase before saving to setup.conf
-echo "username=${username,,}" >> ${HOME}/ArchTitus/configs/setup.conf
+echo "username=${username,,}" >> ${HOME}/SaikouOS/configs/setup.conf
 
     #Set Password
     read -p "Please enter password:" password
-echo "password=${password,,}" >> ${HOME}/ArchTitus/configs/setup.conf
+echo "password=${password,,}" >> ${HOME}/SaikouOS/configs/setup.conf
 
     # Loop through user input until the user gives a valid hostname, but allow the user to force save 
 	while true
@@ -161,7 +171,7 @@ echo "password=${password,,}" >> ${HOME}/ArchTitus/configs/setup.conf
 		fi 
 	done 
 
-    echo "NAME_OF_MACHINE=${name_of_machine,,}" >> ${HOME}/ArchTitus/configs/setup.conf
+    echo "NAME_OF_MACHINE=${name_of_machine,,}" >> ${HOME}/SaikouOS/configs/setup.conf
 fi
 echo -ne "
 -------------------------------------------------------------------------
@@ -177,9 +187,9 @@ if [ $(whoami) = "root"  ]; then
     echo "$USERNAME:$PASSWORD" | chpasswd
     echo "$USERNAME password set"
 
-	cp -R $HOME/ArchTitus /home/$USERNAME/
-    chown -R $USERNAME: /home/$USERNAME/ArchTitus
-    echo "ArchTitus copied to home directory"
+	cp -R $HOME/SaikouOS /home/$USERNAME/
+    chown -R $USERNAME: /home/$USERNAME/SaikouOS
+    echo "SaikouOS copied to home directory"
 
 # enter $NAME_OF_MACHINE to /etc/hostname
 	echo $NAME_OF_MACHINE > /etc/hostname

@@ -5,21 +5,31 @@
 # @brief Finalizing installation configurations and cleaning up after script.
 echo -ne "
 -------------------------------------------------------------------------
-   █████╗ ██████╗  ██████╗██╗  ██╗████████╗██╗████████╗██╗   ██╗███████╗
-  ██╔══██╗██╔══██╗██╔════╝██║  ██║╚══██╔══╝██║╚══██╔══╝██║   ██║██╔════╝
-  ███████║██████╔╝██║     ███████║   ██║   ██║   ██║   ██║   ██║███████╗
-  ██╔══██║██╔══██╗██║     ██╔══██║   ██║   ██║   ██║   ██║   ██║╚════██║
-  ██║  ██║██║  ██║╚██████╗██║  ██║   ██║   ██║   ██║   ╚██████╔╝███████║
-  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝   ╚═╝    ╚═════╝ ╚══════╝
+   SSSSSSSSSSSSSSS                     iiii  kkkkkkkk                                                 OOOOOOOOO        SSSSSSSSSSSSSSS 
+ SS:::::::::::::::S                   i::::i k::::::k                                               OO:::::::::OO    SS:::::::::::::::S
+S:::::SSSSSS::::::S                    iiii  k::::::k                                             OO:::::::::::::OO S:::::SSSSSS::::::S
+S:::::S     SSSSSSS                          k::::::k                                            O:::::::OOO:::::::OS:::::S     SSSSSSS
+S:::::S              aaaaaaaaaaaaa   iiiiiii  k:::::k    kkkkkkk ooooooooooo   uuuuuu    uuuuuu  O::::::O   O::::::OS:::::S            
+S:::::S              a::::::::::::a  i:::::i  k:::::k   k:::::koo:::::::::::oo u::::u    u::::u  O:::::O     O:::::OS:::::S            
+ S::::SSSS           aaaaaaaaa:::::a  i::::i  k:::::k  k:::::ko:::::::::::::::ou::::u    u::::u  O:::::O     O:::::O S::::SSSS         
+  SS::::::SSSSS               a::::a  i::::i  k:::::k k:::::k o:::::ooooo:::::ou::::u    u::::u  O:::::O     O:::::O  SS::::::SSSSS    
+    SSS::::::::SS      aaaaaaa:::::a  i::::i  k::::::k:::::k  o::::o     o::::ou::::u    u::::u  O:::::O     O:::::O    SSS::::::::SS  
+       SSSSSS::::S   aa::::::::::::a  i::::i  k:::::::::::k   o::::o     o::::ou::::u    u::::u  O:::::O     O:::::O       SSSSSS::::S 
+            S:::::S a::::aaaa::::::a  i::::i  k:::::::::::k   o::::o     o::::ou::::u    u::::u  O:::::O     O:::::O            S:::::S
+            S:::::Sa::::a    a:::::a  i::::i  k::::::k:::::k  o::::o     o::::ou:::::uuuu:::::u  O::::::O   O::::::O            S:::::S
+SSSSSSS     S:::::Sa::::a    a:::::a i::::::ik::::::k k:::::k o:::::ooooo:::::ou:::::::::::::::uuO:::::::OOO:::::::OSSSSSSS     S:::::S
+S::::::SSSSSS:::::Sa:::::aaaa::::::a i::::::ik::::::k  k:::::ko:::::::::::::::o u:::::::::::::::u OO:::::::::::::OO S::::::SSSSSS:::::S
+S:::::::::::::::SS  a::::::::::aa:::ai::::::ik::::::k   k:::::koo:::::::::::oo   uu::::::::uu:::u   OO:::::::::OO   S:::::::::::::::SS 
+ SSSSSSSSSSSSSSS     aaaaaaaaaa  aaaaiiiiiiiikkkkkkkk    kkkkkkk ooooooooooo       uuuuuuuu  uuuu     OOOOOOOOO      SSSSSSSSSSSSSSS
 -------------------------------------------------------------------------
                     Automated Arch Linux Installer
-                        SCRIPTHOME: ArchTitus
+                        SCRIPTHOME: SaikouOS
 -------------------------------------------------------------------------
 
 Final Setup and Configurations
 GRUB EFI Bootloader Install & Check
 "
-source ${HOME}/ArchTitus/configs/setup.conf
+source ${HOME}/SaikouOS/configs/setup.conf
 
 if [[ -d "/sys/firmware/efi" ]]; then
     grub-install --efi-directory=/boot ${DISK}
@@ -43,7 +53,7 @@ THEME_NAME=CyberRe
 echo -e "Creating the theme directory..."
 mkdir -p "${THEME_DIR}/${THEME_NAME}"
 echo -e "Copying the theme..."
-cd ${HOME}/ArchTitus
+cd ${HOME}/SaikouOS
 cp -a configs${THEME_DIR}/${THEME_NAME}/* ${THEME_DIR}/${THEME_NAME}
 echo -e "Backing up Grub config..."
 cp -an /etc/default/grub /etc/default/grub.bak
@@ -116,11 +126,11 @@ echo -ne "
 -------------------------------------------------------------------------
 "
 
-SNAPPER_CONF="$HOME/ArchTitus/configs/etc/snapper/configs/root"
+SNAPPER_CONF="$HOME/SaikouOS/configs/etc/snapper/configs/root"
 mkdir -p /etc/snapper/configs/
 cp -rfv ${SNAPPER_CONF} /etc/snapper/configs/
 
-SNAPPER_CONF_D="$HOME/ArchTitus/configs/etc/conf.d/snapper"
+SNAPPER_CONF_D="$HOME/SaikouOS/configs/etc/conf.d/snapper"
 mkdir -p /etc/conf.d/
 cp -rfv ${SNAPPER_CONF_D} /etc/conf.d/
 
@@ -131,7 +141,7 @@ echo -ne "
                Enabling (and Theming) Plymouth Boot Splash
 -------------------------------------------------------------------------
 "
-PLYMOUTH_THEMES_DIR="$HOME/ArchTitus/configs/usr/share/plymouth/themes"
+PLYMOUTH_THEMES_DIR="$HOME/SaikouOS/configs/usr/share/plymouth/themes"
 PLYMOUTH_THEME="arch-glow" # can grab from config later if we allow selection
 mkdir -p /usr/share/plymouth/themes
 echo 'Installing Plymouth theme...'
@@ -157,8 +167,8 @@ sed -i 's/^%wheel ALL=(ALL:ALL) NOPASSWD: ALL/# %wheel ALL=(ALL:ALL) NOPASSWD: A
 sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
 sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
-rm -r $HOME/ArchTitus
-rm -r /home/$USERNAME/ArchTitus
+rm -r $HOME/SaikouOS
+rm -r /home/$USERNAME/SaikouOS
 
 # Replace in the same state
 cd $pwd

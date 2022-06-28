@@ -1,5 +1,5 @@
-# ArchTitus Installer Script
-[![GitHub Super-Linter](https://github.com/ChrisTitusTech/ArchTitus/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
+# SaikouOS Installer Script
+[![GitHub Super-Linter](https://github.com/ChrisTitusTech/SaikouOS/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
 <img src="https://i.imgur.com/YiNMnan.png" />
 
@@ -18,9 +18,9 @@ From initial Prompt type the following commands:
 
 ```
 pacman -Sy git
-git clone https://github.com/ChrisTitusTech/ArchTitus
-cd ArchTitus
-./archtitus.sh
+git clone https://github.com/ChrisTitusTech/SaikouOS
+cd SaikouOS
+./SaikouOS.sh
 ```
 
 ### System Description
